@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading...</title>
+  <link rel="stylesheet" href="../../src/core/css/base.css" />
+  <link rel="stylesheet" href="../../src/core/css/controls.css" />
+</head>
+<body>
+  <div id="status-bar">
+    <a href="../../index.html" style="color:#666;text-decoration:none;margin-right:1rem">← Gallery</a>
+    <span id="status">Loading...</span>
+  </div>
+  
+  <div id="app"></div>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+  <script type="module">
+    const pathParts = window.location.pathname.split('/');
+    const projectName = pathParts[pathParts.length - 2];
+    
+    if (!window.location.search.includes('project=')) {
+      const newUrl = window.location.pathname + '?project=' + projectName + window.location.hash;
+      history.replaceState(null, '', newUrl);
+    }
+    
+    import('../../src/main.js');
+  </script>
+</body>
+</html>

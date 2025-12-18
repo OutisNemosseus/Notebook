@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Plot Gallery</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    h1 { margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .project-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; text-decoration: none; color: inherit; display: block; transition: all 0.2s; }
+    .project-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #3b82f6; transform: translateY(-2px); }
+    .project-card h2 { margin: 0 0 0.5rem 0; font-size: 1.25rem; }
+    .project-card p { margin: 0; color: #666; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>🎨 Python Plot Gallery</h1>
+  <p class="subtitle">Interactive visualizations powered by Pyodide</p>
+  <div id="grid" class="project-grid"></div>
+
+  <script type="module">
+    import { projects } from './src/python/index.js';
+    const grid = document.getElementById('grid');
+    
+    for (const name of projects) {
+      const project = await import('./src/python/' + name + '.py.js');
+      const card = document.createElement('a');
+      card.className = 'project-card';
+      card.href = './projects/' + name + '/index.html';
+      card.innerHTML = `<h2>${project.META.title}</h2><p>${project.META.description}</p>`;
+      grid.appendChild(card);
+    }
+  </script>
+</body>
+</html>

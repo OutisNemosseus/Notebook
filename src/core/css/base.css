@@ -1,0 +1,64 @@
+/* base.css */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+code {
+  background: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #111827;
+  color: #e5e7eb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.section-layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.section-left, .section-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .section-layout {
+    flex-direction: column;
+  }
+}
+
+/* 状态栏 */
+#status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  z-index: 100;
+}
+
+#app {
+  margin-top: 3rem;
+}

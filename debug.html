@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Debug Test</title>
+</head>
+<body>
+  <div id="status">Testing imports...</div>
+  <div id="app"></div>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+  <script type="module">
+    const status = document.getElementById('status');
+    
+    try {
+      status.textContent = 'Step 1: Loading projectLoader...';
+      const { loadProject } = await import('./src/core/modules/projectLoader.js');
+      console.log('projectLoader OK');
+      
+      status.textContent = 'Step 2: Loading sectionRenderer...';
+      const { renderAllSections } = await import('./src/core/modules/sectionRenderer.js');
+      console.log('sectionRenderer OK');
+      
+      status.textContent = 'Step 3: Loading sections/index...';
+      const { createSections, createSidebarConfig } = await import('./src/sections/index.js');
+      console.log('sections/index OK');
+      
+      status.textContent = 'Step 4: Loading plotService...';
+      const plotService = await import('./src/core/services/plotService.js');
+      console.log('plotService OK');
+      
+      status.textContent = 'Step 5: Loading gui/index...';
+      const { restorePageState, SidebarGUI } = await import('./src/core/gui/index.js');
+      console.log('gui/index OK');
+      
+      status.textContent = 'All imports OK!';
+    } catch (error) {
+      status.textContent = 'Error: ' + error.message;
+      console.error('Import error:', error);
+    }
+  </script>
+</body>
+</html>
